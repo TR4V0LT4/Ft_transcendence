@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lobby</title>
+        <style>
+            /* CSS styles */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f0f0f0;
+            }
+            .lobby-container {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .active-players {
+                list-style-type: none;
+                padding: 0;
+            }
+            .active-player {
+                margin-bottom: 10px;
+                padding: 10px;
+                background-color: #e0e0e0;
+                border-radius: 4px;
+            }
+            .active-player span {
+                font-weight: bold;
+            }
+            </style>
+</head>
+<body>
+    <div class="lobby-container">
+        <h2>Active Players</h2>
+        <ul class="active-players">
+            <li class="active-player">Player 1<span> (Host)</span></li>
+            <li class="active-player">Player 2</li>
+            <li class="active-player">Player 3</li>
+            <li class="active-player">Player 4</li>
+        </ul>
+        <form method="POST" action="/ludo/game/">
+            {% csrf_token %}
+            <input type="submit" class="button" value="start game" />
+        </div>
+    </div>
+</body>
+</html>

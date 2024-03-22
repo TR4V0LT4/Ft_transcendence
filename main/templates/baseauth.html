@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  {% load static %}
+  <head>
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!--
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css">
+    -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">    
+    <style>
+      body, h1, h2, h3, h4, h5, h6  {
+        font-family: Roboto, sans-serif;
+      }
+      .w3-sofia {
+        font-family: Sofia, cursive;
+      }
+    </style>
+    <script src="https://kit.fontawesome.com/17c2082d4f.js" crossorigin="anonymous"></script>
+    <title>
+      {% block title %}
+        {{ title }}
+      {% endblock title %}
+    </title>
+
+  </head>
+  <body>
+ 
+  <!-- Top Navigation -->
+  <div class="w3-top">
+    <div class="w3-bar w3-theme-light w3-border">
+      <a href="{% url 'github:home' %}" class="w3-bar-item w3-button w3-border-right">Home</a>
+      <a class="w3-bar-item w3-button w3-border-right" href="{% url 'github:page'  %}">Secret Page</a>
+
+      {% if user.is_authenticated %}
+      <a href="{% url 'github:logout' %}" class="w3-bar-item w3-border-right w3-button">Logout </a>
+      <button class="w3-button w3-pink w3-sofia">Welcome, {{ user.username }}!</button>
+      {% endif %}
+    </div>
+  </div>
+  <div class="w3-main">
+    <!-- Header -->
+    <div class="w3-theme" style="margin-top:40px">
+      <div class="w3-card w3-center w3-sofia">
+        <h1 class="w3-sofia">Auth Demo</h1>
+        <p>Django app for authentication via OAuth 2</p>
+      </div>
+    </div>
+    <!-- Body -->
+    <div class="w3-container w3-responsive w3-text-theme">
+      {% if messages %}
+      <div class="w3-panel w3-pink w3-display-container">
+        <ul class="w3-ul">
+        {% for message in messages %}
+          <span onclick="this.parentElement.style.display='none'" class="w3-button w3-medium w3-display-topright">&times;</span>
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+      <!--
+      <div id="debug">
+
+      </div>
+      -->
+      {% block content %}
+      {% endblock content %}
+
+    </div>
+
+    <!-- Footer -->
+    <div class="w3-theme w3-card w3-center w3-sofia">
+      <h1 class="w3-sofia">Designed By</h1>
+      <p>&copy; <a href="http://merilynchesler.medium.com">Merilyn Chesler</a>, All Rights Reserved.</p>
+    </div>
+  </div>
+  </body>
+</html>

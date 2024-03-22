@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% comment %} index.html {% endcomment %}
+{% block content %}
+<div class="wrapper">
+    <h1>Welcome to ludo game</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div class='form-control'>
+            <label for="room">Room id</label>
+            <input id="room" type="text" name="room_code" required />
+        </div>
+        <input type="submit" class="button" value="Join lobby" />
+    </div>
+</form>
+{% endblock content %}
