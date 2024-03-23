@@ -43,12 +43,13 @@ export class Ludo {
 
     constructor() {
       
+        // this.listenDiceClick();
+        // this.listenPieceClick();
+        // this.resetGame();
+        
         // this.diceValue = 4;
         // this.turn = 0;
         // this.state = STATE.DICE_ROLLED;
-        this.listenDiceClick();
-        // this.listenPieceClick();
-        // this.resetGame();
         // this.setPiecePosition('P1', 0, 0);
         // this.setPiecePosition('P2', 0, 1);
         // this.diceValue = 6;
@@ -65,7 +66,7 @@ export class Ludo {
         this.state = STATE.DICE_ROLLED;
         // console.log('dice value =' , this.diceValue);
         
-        // this.checkForEligiblePieces();
+        this.checkForEligiblePieces();
     }
 
     checkForEligiblePieces() {

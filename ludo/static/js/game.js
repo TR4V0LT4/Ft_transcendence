@@ -9,13 +9,16 @@ const url = 'ws://' + window.location.host + '/ws/ludo/game/' ;
 // // Initialize WebSocket
 const ws = new WebSocket(url);
 const ludo = new Ludo();
-ludo.listenDiceClick();
-console.log('dice value = ' , ludo._diceValue);
-console.log('dice 1value = ' , ludo.diceValue);
+// ludo.listenDiceClick();
+// console.log('dice value = ' , ludo._diceValue);
+// console.log('dice 1value = ' , ludo.diceValue);
 
 
 ws.onopen = function(){
     console.log('opened');
+    this.listenDiceClick();
+    this.listenPieceClick();
+    this.resetGame();
     ws.send("i send this message");
 }
 
@@ -28,6 +31,7 @@ ws.onclose = function(event){
     console.log(event);
     console.log('closed ');
 }
+
 
 // Game board for maintaining the state of the game
 // ludo.listenDiceClick();

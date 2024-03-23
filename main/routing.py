@@ -1,13 +1,3 @@
-# from channels.routing import ProtocolTypeRouter, URLRouter
-# from django.urls import path
-# from ludo.consumers import Fconsumer
-
-# application = ProtocolTypeRouter({
-#     'websocket' : URLRouter([
-#         path('ws/ludo/game/', Fconsumer)
-#     ])
-# })
-
 from django.urls import path
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
