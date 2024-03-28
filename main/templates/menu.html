@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+	<link
+      rel="stylesheet"
+      href="{% static 'www/css/menu.css' %}"
+    />
+	<script src="https://kit.fontawesome.com/b5df6958ea.js" crossorigin="anonymous"></script>
+	<!-- Custom CSS -->
+	
+  </head>
+  <body>
+	  <div class="d-flex navcontainer justify-content-between align-items-center">
+		  <h1 class="welcome-text text-center text-purple">Welcome To Pong!,<strong class="text-white">{{ request.session.profile.login }}</strong>!</h1>
+		  <div class="dropdown">
+			  <div class="image-container">
+				<img src="{{ request.session.profile.image.link }}" alt="avatar" class="rounded-circle" width="70px">
+			  </div>
+			<div class="dropdown-content">
+			  <a href="{% url 'nopassauth:profile' %}">Profile Settings</a>
+			  <a href="{% url 'nopassauth:logout' %}" id="logout">Logout</a>
+			  </div>
+			</div>
+	  </div> 
+	  <div class="container-cstm">
+			<div class="d-flex">
+			  <div class="card cstm-card">
+				<img
+				  src="{% static 'www/imgs/Pong.jpg' %}"
+				  class="card-img-top card-img-cstm"
+				  alt="..."
+				/>
+				<div class="card-body">
+				  <h5 class="card-title text-white">Play Space-pong</h5>
+				  <p class="card-text text-white">
+					Play Space Pong (with a twist!!)
+				  </p>
+				  <a href="{% url 'pong:pong' %}" class="custom-btn btn-6">Play</a>
+				</div>
+			  </div>
+			</div>
+			<div class="d-flex">
+			  <div class="card cstm-card">
+				<img
+				  src="{% static 'www/imgs/test.jpg' %}"
+				  class="card-img-top card-img-cstm"
+				  alt="..."
+				/>
+				<div class="card-body">
+				  <h5 class="card-title text-white">Play Ludo</h5>
+				  <p class="card-text text-white">
+					Play Ludo with your friends and family.
+				  </p>
+				  <a href="{% url 'ludo:ludo' %}" class="custom-btn btn-6">Play</a>
+				</div>	
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

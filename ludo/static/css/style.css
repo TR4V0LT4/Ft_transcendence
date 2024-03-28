@@ -10,7 +10,7 @@
 .ludo-container .ludo {
   height: 450px;
   width: 100%;
-  background-image: url("../images/ludo-bg.jpg");
+  background-image: url("../images/board.jpg");
   background-size: contain;
   position: relative;
 }
@@ -67,6 +67,14 @@
   background-color: #00b550;
 }
 
+[player-id="P3"].player-piece {
+  background-color: #eff305;
+}
+
+[player-id="P4"].player-piece {
+  background-color: #ff1100;
+}
+
 .player-base {
   width: 40%;
   height: 40%;
@@ -85,6 +93,19 @@
   right: 0;
   border-color: #049645;
 }
+
+.player-bases [player-id="P3"].player-base {
+  top: 0;
+  left: 0;
+  border-color: #e1f100;
+}
+
+.player-bases [player-id="P4"].player-base {
+  bottom: 0;
+  right: 0;
+  border-color: #ff1100;
+}
+
 
 .player-base.highlight {
   /* animation: border-blink 0.7s infinite ease-in-out;

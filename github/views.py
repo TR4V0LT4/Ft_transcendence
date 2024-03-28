@@ -77,6 +77,7 @@ class HomeView(TemplateView):
   template_name = 'home.html'
 
 def logout_request(request):
+	if not request.user.is_authenticated:
+		return render(request, "myapp/login_alt.html")
 	logout(request)
-	messages.add_message(request, messages.SUCCESS, "You have been logged out")
-	return render(request, 'home.html')
+	return render(request, 'login_alt.html')

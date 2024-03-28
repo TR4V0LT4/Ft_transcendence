@@ -7,8 +7,9 @@ from django.views.generic import TemplateView
 from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth import login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from oauthlib.oauth2 import WebApplicationClient
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 
@@ -66,17 +67,22 @@ class CallbackView(TemplateView):
 			messages.add_message(self.request, messages.DEBUG, "User %s is created, Authenticated %s?" %(user.username, user.is_authenticated))
 			login(self.request, user)
 		return HttpResponseRedirect(reverse('nopassauth:welcome'))
+
+class WelcomeView(LoginRequiredMixin, TemplateView):
+  template_name = 'menu.html'
 	
-class WelcomeView(TemplateView):
-  template_name = 'welcome.html'
-
-class PageView(TemplateView):
-  template_name = 'page.html'
-
 class HomeView(TemplateView):
-  template_name = 'home.html'
+  template_name = 'login_alt.html'
+
+  def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return redirect('nopassauth:welcome')
+        else:
+            return super().dispatch(request, *args, **kwargs)
+
+class ProfileView(LoginRequiredMixin, TemplateView):
+	template_name = 'profile.html'
 
 def logout_request(request):
 	logout(request)
-	messages.add_message(request, messages.SUCCESS, "You have been logged out")
-	return render(request, 'home.html')
+	return render(request, 'login_alt.html')

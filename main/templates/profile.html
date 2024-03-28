@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+    <!-- Add your CSS file or style inline -->
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'www/css/profile.css' %}" />
+    <script
+      src="https://kit.fontawesome.com/b5df6958ea.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="profile-info">
+      <img
+        src="{{ request.session.profile.image.link }}"
+        width="20%"
+        alt="User Avatar"
+      />
+      <div>
+        <h2>{{ request.session.profile.login }}</h2>
+        <p>{{ request.session.profile.email }}</p>
+        <!-- Add more user info as needed -->
+      </div>
+    </div>
+
+    <div class="game-stats">
+      <h3>Game 1 Statistics</h3>
+      <table>
+        <tr>
+          <th>Games Played</th>
+          <td>100</td>
+        </tr>
+        <tr>
+          <th>Wins</th>
+          <td>70</td>
+        </tr>
+        <tr>
+          <th>Win Rate</th>
+          <td>70%</td>
+        </tr>
+        <tr>
+          <th>Highest Score</th>
+          <td>10000</td>
+        </tr>
+        <!-- Add more game stats as needed -->
+      </table>
+    </div>
+
+    <div class="game-stats">
+      <h3>Game 2 Statistics</h3>
+      <table>
+        <tr>
+          <th>Games Played</th>
+          <td>50</td>
+        </tr>
+        <tr>
+          <th>Wins</th>
+          <td>30</td>
+        </tr>
+        <tr>
+          <th>Win Rate</th>
+          <td>60%</td>
+        </tr>
+        <tr>
+          <th>Highest Level</th>
+          <td>10</td>
+        </tr>
+        <!-- Add more game stats as needed -->
+      </table>
+    </div>
+  </body>
+</html>

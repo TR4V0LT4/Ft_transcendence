@@ -1,4 +1,5 @@
-import { Ludo } from './ludo/Ludo.js';
+import { Ludo } from './ludo/ludo.js' ;
+import { BASE_POSITIONS, HOME_ENTRANCE, HOME_POSITIONS, PLAYERS, SAFE_POSITIONS, START_POSITIONS, STATE, TURNING_POINTS } from './ludo/constants.js';
 
 // Get the room code from the HTML attribute
 // const roomCode = document.getElementById("game_board").getAttribute("room_code");
@@ -13,76 +14,73 @@ const ludo = new Ludo();
 // console.log('dice value = ' , ludo._diceValue);
 // console.log('dice 1value = ' , ludo.diceValue);
 
+ludo.currentPositions = JSON.parse(JSON.stringify(BASE_POSITIONS));
+let players = [] ;
+let playerNumber = 0;
+// let playerAdded = false;
 
 ws.onopen = function(){
     console.log('opened');
-    this.listenDiceClick();
-    this.listenPieceClick();
-    this.resetGame();
-    ws.send("i send this message");
+    ws.send(JSON.stringify({ type: 'newClient', client: 'ClientName' }));
+    // ws.send(JSON.stringify({ type: 'getPlayers' }));
+    // ws.send(JSON.stringify({ type: 'players' }));
+    // let playerNumber = players.length + 1;
+    // let player = "P" + playerNumber;
+    // players.push({ player: player, ws: this });
+
+    // players.forEach(p => {
+    //     p.ws.send(JSON.stringify(players.map(p => p.player)));
+    // });
+    // ws.send("Player " + player + " connected");
+    // PLAYERS.forEach(player => {
+    // [0, 1, 2, 3].forEach(piece => {
+    //         console.log(player,ludo.currentPositions[player][piece]);
+    //         ludo.setPiecePosition(player, piece, ludo.currentPositions[player][piece])
+    //     })
+    // });
+    // this.listenDiceClick();
+    // this.listenPieceClick();
+    // this.resetGame();
+    // ws.send("i send this message");
 }
 
 ws.onmessage = function(event){
-    console.log(event);
-    console.log(' : message received');
-}
+        const data = JSON.parse(event.data);
+        if (data.type === 'players') {
+            players = data.players;
+            console.log('Players:', players);
+            while(players[playerNumber] !== undefined){
+                [0, 1, 2, 3].forEach(piece => {
+                         console.log(players[playerNumber],ludo.currentPositions[players[playerNumber]][piece]);
+                         ludo.setPiecePosition(players[playerNumber], piece, ludo.currentPositions[players[playerNumber]][piece])
+                     })
+                playerNumber++;
+            }
+        }
+      };
+    // console.log(event);
+    // console.log(' : message received');
+    // let data = JSON.parse(event.data);
+    // if (data.type === 'players') {
+    //     players = data.players;
+    //     console.log('palyers',players);
+    //     if (!playerAdded) {
+    //         let playerNumber = players.length + 1;
+    //         console.log(playerNumber);
+    //         let player = "P" + playerNumber;
+    //         players.push({ player: player, ws: this });
+
+    //         players.forEach(p => {
+    //             p.ws.send(JSON.stringify(players.map(p => p.player)));
+    //         });
+    //         console.log("Player " + player + " connected");
+    //         playerAdded = true;
+    //     }
+    // }
+
 
 ws.onclose = function(event){
     console.log(event);
     console.log('closed ');
 }
-
-
-// Game board for maintaining the state of the game
-// ludo.listenDiceClick();
-// Function to send player presence to the server
-// function sendPlayerPresence() {
-    //     gameSocket.send(JSON.stringify({
-        //         "event": "PLAYER_CONNECT",
-        //         "message": ""
-        //     }));
-        // }
-        
-        // Function to handle WebSocket events
-//         gameSocket.onopen = function open() {
-//             // this.listenDiceClick();
-//             // this.listenPieceClick();
-//             // this.resetGame();
-//             console.log('WebSockets connection created.');
-//     // sendPlayerPresence();
-// };
-
-// gameSocket.onmessage = function (e) {
-//     // On receiving a message from the server
-//     const data = JSON.parse(e.data);
-//     const event = data["event"];
-//     const payload = data["payload"];
-
-//     switch (event) {
-//         case "UPDATE_BOARD":
-//             // Update local game board with received data
-//             ludo._state.
-//             ludo.updateBoard(payload);
-//             break;
-//         case "END":
-//             alert(payload.message);
-//             reset();
-//             break;
-//         // Handle other events as needed
-//     }
-// };
-
-
-// Function to reset the game board
-// function reset() {
-//     ludo.reset();
-// }
-
-// Function to make a move and send it to the server
-// function makeMove(index) {
-//     sendMove(index);
-// }
-
-// Call the connect function at the start
-// gameSocket.onopen();
 

@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-# from dotenv import dotenv_values
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,12 +30,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+LOGIN_URL = '/login'
 # Application definition
 
 INSTALLED_APPS = [
-    'channels',
-    'daphne',
+	'daphne', #added for pong game
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,17 +46,36 @@ INSTALLED_APPS = [
 	'github', #added for github login
 	'ludo', #added for game
 	'nopassauth', #added for 42 login
-
+	'pong', #added for pong game
+	'corsheaders', #added for pong game
 ]
+
+ASGI_APPLICATION = 'main.asgi.application'
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
+# CHANNEL_LAYERS = {
+# 	'default': {
+# 		'BACKEND':'channels.layers.InMemoryChannelLayer'
+# 	}
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+	'corsheaders.middleware.CorsMiddleware', #added for pong game
     'django.middleware.common.CommonMiddleware',
+	# 'pong.middleware.PortRedirectMiddleware', #added for pong game
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	
 ]
 
 ROOT_URLCONF = 'main.urls'
@@ -77,23 +95,9 @@ TEMPLATES = [
         },
     },
 ]
-ASGI_APPLICATION = 'main.routing.application'
-# ASGI_APPLICATION = 'ludo.asgi.application'
-# WSGI_APPLICATION = 'main.wsgi.application'
 
-# CHANNEL_LAERS = {
-#     "default":{
-#         "BACKEND": "channels.layers.InMemoryChannelLayer"
-#     }
-# }
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
-        },
-    },
-}
+WSGI_APPLICATION = 'main.wsgi.application'
+
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -140,8 +144,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = 'static/'
-
+STATICFILES_DIRS = [
+    BASE_DIR / "main/static",
+    "ludo/static/",
+    "pong/templates/static/",
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
