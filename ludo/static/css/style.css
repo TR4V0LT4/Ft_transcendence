@@ -17,7 +17,7 @@
 
 .active-player {
   background-color:transparent; /* Red background */
-  color: #ffffff; /* White text color */
+  color: transparent; /* White text color */
   font-size: 24px; 
   text-align: center;/* Larger font size */
 }
@@ -124,7 +124,7 @@
 }
 
 .btn {
-  padding: 8px 20px;
+  padding: 25px 25px;
   border: none;
   /* cursor: pointer; */
   font-size: 16px;
@@ -136,8 +136,20 @@
 }
 
 .btn-dice {
-  background-color: #000061;
+  background-color: #050507;
   color: white;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  transition: all 0.3s ease;
+}
+
+.dice-image {
+  transition: opacity 0.5s ease;
+}
+
+.btn-dice:hover {
+  transform: scale(1.05); /* Slightly enlarge the button when hovered */
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4); /* Increase shadow when hovered */
 }
 
 .row {
@@ -150,5 +162,5 @@
 .dice-value {
   font-size: 24px;
   font-weight: bold;
-  color: aliceblue;
+  color:transparent;
 }

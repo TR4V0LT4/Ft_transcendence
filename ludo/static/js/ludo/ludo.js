@@ -44,17 +44,10 @@ export class Ludo {
     }
 
     constructor() {
-        // this.listenDiceClick();
-        // this.listenPieceClick();
-        // this.resetGame();
-        // this.diceValue = 4;
-        // this.turn = 0;
-        // this.state = STATE.DICE_ROLLED;
-        // this.setPiecePosition('P1', 0, 0);
-        // this.setPiecePosition('P2', 0, 1);
-        // this.diceValue = 6;
-        // console.log(this.getEligiblePieces('P1'))
-        
+        this.listenDiceClick();
+        this.listenPieceClick();
+        this.resetGame();  
+        diceImage.src = `/static/images/dice/undifined.png`;
     }
 
     listenDiceClick() {
@@ -63,9 +56,8 @@ export class Ludo {
 
     onDiceClick() {
         this.diceValue = 1 + Math.floor(Math.random() * 6);
+        this.updateDiceImage(this.diceValue);
         this.state = STATE.DICE_ROLLED;
-        // console.log('dice value =' , this.diceValue);
-        
         this.checkForEligiblePieces();
     }
 
@@ -77,6 +69,17 @@ export class Ludo {
         }else {
             this.incrementTurn();
         }
+    }
+    updateDiceImage(diceValue) {
+        let diceImage = document.querySelector('.dice-image');
+    diceImage.style.opacity = '0'; // Start the fade out animation
+
+    setTimeout(() => {
+        diceImage.src = `/static/images/dice/${diceValue}.png`;
+        diceImage.style.opacity = '1'; // Fade in after image source is changed
+    }, 300);
+        // let diceImage = document.querySelector('.dice-image');
+        // diceImage.src = `/static/images/dice/${diceValue}.png`;
     }
 
     incrementTurn() {
@@ -117,15 +120,8 @@ export class Ludo {
         });
     }
 
-    // listenResetClick() {
-    //     UI.listenResetClick(this.resetGame.bind(this))
-    // }
-
     resetGame() {
         this.currentPositions = JSON.parse(JSON.stringify(BASE_POSITIONS));
-        console.log('reset game');
-
-    
         PLAYERS.forEach(player => {
             [0, 1, 2, 3].forEach(piece => {
                 this.setPiecePosition(player, piece, this.currentPositions[player][piece])
@@ -151,15 +147,12 @@ export class Ludo {
         if(!target.classList.contains('player-piece') || !target.classList.contains('highlight')) {
             return;
         }
-        console.log('piece clicked')
-
         const player = target.getAttribute('player-id');
         const piece = target.getAttribute('piece');
         this.handlePieceClick(player, piece);
     }
 
     handlePieceClick(player, piece) {
-        console.log(player, piece);
         const currentPosition = this.currentPositions[player][piece];
         
         if(BASE_POSITIONS[player].includes(currentPosition)) {

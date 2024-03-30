@@ -23,12 +23,6 @@ export class UI {
      * @param {Number} newPosition 
      */
     static setPiecePosition(player, piece, newPosition) {
-        // console.log("im here ==>",player, piece, newPosition);
-        // if(!playerPiecesElements[player] || !playerPiecesElements[player][piece]) {
-        //     console.error(`Player element of given player: ${player} and piece: ${piece} not found`)
-        //     return;
-        // }
-
         const [x, y] = COORDINATES_MAP[newPosition];
 
         const pieceElement = playerPiecesElements[player][piece];
@@ -43,6 +37,8 @@ export class UI {
         }
         
         const player = PLAYERS[index];
+        //display image instead of dice value
+        
 
         // Display player ID
         document.querySelector('.active-player span').innerText = player;
@@ -85,23 +81,3 @@ export class UI {
         document.querySelector('.dice-value').innerText = value;
     }
 }
-//DEBUGING
-// UI.setPiecePosition('P1', 0, 0);
-// UI.setTurn(0);
-// UI.setTurn(1);
-
-// UI.disableDice();
-// UI.enableDice();
-// UI.highlightPieces('P1', [0]);
-// UI.unhighlightPieces();
-// UI.setDiceValue(5);
-//DEBUGING
-// UI.setPiecePosition('P1', 0, 0);
-// UI.setTurn(0);
-// UI.setTurn(1);
-
-// UI.disableDice();
-// UI.enableDice();
-// UI.highlightPieces('P1', [0]);
-// UI.unhighlightPieces();
-// UI.setDiceValue(5);

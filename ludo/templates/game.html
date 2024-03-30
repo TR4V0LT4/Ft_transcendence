@@ -23,6 +23,7 @@
   <body>
     <div id="game_board" room_code="{{room_code}}"></div>
     <div class="ludo-container">
+      <h1>Welcome to Ludo :  {{room_code}}</h1>
       <div class="ludo">
         <div class="player-pieces">
           <div class="player-piece" player-id="P1" piece="0"></div>
@@ -55,13 +56,19 @@
       </div>
       <div class="footer">
         <div class="row">
-          <button id="dice-btn" class="btn btn-dice">Roll</button>
-          <div class="dice-value"></div>
+          <button  id="dice-btn" class="btn btn-dice">Roll</button>
+          <h2 class="dice-value">Dice : <span></span></h2>
+          <img class="dice-image" src="{% static 'images/dice/undifined.png' %}" alt="Dice">
         </div>
         <h2 class="active-player">Turn : <span></span></h2>
-        <h2 style="text-align: center; color: rgb(214, 214, 235);">room_code : {{room_code}}</h2>
+        <!-- <h2 style="text-align: center; color: rgb(214, 214, 235);">room_code : {{room_code}}</h2> -->
       </div>
     </div>
+    <!-- <div class="dice-container">
+      <div class="dice">
+        <div class="dice-dot"></div>
+      </div>
+    </div> -->
 
     <script src="{% static 'js/game.js' %}" type="module"></script>
   </body>
