@@ -11,6 +11,11 @@ const playerPiecesElements = {
 export class UI {
     static listenDiceClick(callback) {
         diceButtonElement.addEventListener('click', callback);
+        window.addEventListener('keydown', function(event) {
+            if (event.code === 'Space') {
+                callback();
+            }
+        });
     }
     static listenPieceClick(callback) {
         document.querySelector('.player-pieces').addEventListener('click', callback)

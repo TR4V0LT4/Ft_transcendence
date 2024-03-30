@@ -48,7 +48,7 @@ export class Ludo {
         this.listenPieceClick();
         this.resetGame();
          
-        diceImage.src = `/static/images/dice/undifined.png`;
+        // this.diceImage.src = `/static/images/dice/undifined.png`;
 
     }
 
