@@ -46,8 +46,10 @@ export class Ludo {
     constructor() {
         this.listenDiceClick();
         this.listenPieceClick();
-        this.resetGame();  
+        this.resetGame();
+         
         diceImage.src = `/static/images/dice/undifined.png`;
+
     }
 
     listenDiceClick() {
@@ -57,6 +59,8 @@ export class Ludo {
     onDiceClick() {
         this.diceValue = 1 + Math.floor(Math.random() * 6);
         this.updateDiceImage(this.diceValue);
+        let sound = new Audio('/static/audio/roll.mp3');
+        sound.play();
         this.state = STATE.DICE_ROLLED;
         this.checkForEligiblePieces();
     }
@@ -129,6 +133,7 @@ export class Ludo {
         });
         this.turn = 0;
         this.state = STATE.DICE_NOT_ROLLED;
+        
     }
 
     setPiecePosition(player, piece, newPosition) {
@@ -149,6 +154,8 @@ export class Ludo {
         }
         const player = target.getAttribute('player-id');
         const piece = target.getAttribute('piece');
+        let click = new Audio('/static/audio/piece.mp3');
+                click.play(); 
         this.handlePieceClick(player, piece);
     }
 
@@ -170,7 +177,8 @@ export class Ludo {
         const interval = setInterval(() => {
             this.incrementPiecePosition(player, piece);
             moveBy--;
-
+            let step = new Audio('/static/audio/step.mp3');
+                step.play(); 
             if(moveBy === 0) {
                 clearInterval(interval);
 
@@ -213,6 +221,8 @@ export class Ludo {
                     if(currentPosition === opponentPosition && !SAFE_POSITIONS.includes(currentPosition)) {
                         this.setPiecePosition(opponent, pieceIndex, BASE_POSITIONS[opponent][pieceIndex]);
                         kill = true;
+                        let kill_sound = new Audio('/static/audio/kill.mp3');
+                        kill_sound.play(); 
                     }
                     playerPieceIndex++;
                 }
