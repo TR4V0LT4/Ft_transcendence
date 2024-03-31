@@ -1,6 +1,22 @@
 * {
   box-sizing: border-box;
 }
+.leave-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 10px 20px;
+  background-color: #69b3fc;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.leave-button:hover {
+  background-color: #1b67b3;
+  transform: scale(1.1);
+}
 
 .ludo-container {
   width: 450px;
@@ -149,6 +165,7 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px;
+  border-radius: 10px;
 }
 
 .row {

@@ -149,8 +149,8 @@ export const HOME_POSITIONS = {
 export const TURNING_POINTS = {
     P1: 50,
     P2: 24,
-    P3: 12,
-    P4: 36,
+    P3: 11,
+    P4: 37,
 }
 
 export const SAFE_POSITIONS = [0, 8, 13, 21, 26, 34, 39, 47];

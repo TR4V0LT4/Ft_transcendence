@@ -12,7 +12,7 @@ export class UI {
     static listenDiceClick(callback) {
         diceButtonElement.addEventListener('click', callback);
         window.addEventListener('keydown', function(event) {
-            if (event.code === 'Space') {
+            if (event.code === 'Space' && !diceButtonElement.hasAttribute('disabled')) {
                 callback();
             }
         });

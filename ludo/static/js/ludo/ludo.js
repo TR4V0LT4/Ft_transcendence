@@ -88,12 +88,12 @@ export class Ludo {
 
     incrementTurn() {
         if(this.turn === 0)
-            this.turn = 3;
-        else if(this.turn === 3)
-            this.turn = 1;
-        else if(this.turn === 1)
             this.turn = 2;
         else if(this.turn === 2)
+            this.turn = 1;
+        else if(this.turn === 1)
+            this.turn = 3;
+        else if(this.turn === 3)
             this.turn = 0;
         this.state = STATE.DICE_NOT_ROLLED;
     }
@@ -178,21 +178,28 @@ export class Ludo {
             this.incrementPiecePosition(player, piece);
             moveBy--;
             let step = new Audio('/static/audio/step.mp3');
+            let goal_sound = new Audio('/static/audio/goal.mp3');
                 step.play(); 
             if(moveBy === 0) {
                 clearInterval(interval);
 
                 // check if player won
                 if(this.hasPlayerWon(player)) {
+                        goal_sound.play(); 
                     alert(`Player: ${player} has won!`);
                     this.resetGame();
                     return;
                 }
-
+                
                 const isKill = this.checkForKill(player, piece);
-
+                
                 if(isKill || this.diceValue === 6) {
                     this.state = STATE.DICE_NOT_ROLLED;
+                    return;
+                }
+                if(this.currentPositions[player][piece] === HOME_POSITIONS[player]) {
+                    this.state = STATE.DICE_NOT_ROLLED;
+                        goal_sound.play(); 
                     return;
                 }
 
@@ -230,6 +237,7 @@ export class Ludo {
             }
             playerIndex++;
         }
+        return kill;
     }
     
     hasPlayerWon(player) {
