@@ -32,10 +32,10 @@
 }
 
 .active-player {
-  background-color:transparent; /* Red background */
-  color: transparent; /* White text color */
+  background-color:transparent;
+  color: transparent; 
   font-size: 24px; 
-  text-align: center;/* Larger font size */
+  text-align: center;
 }
 
 .player-pieces {
@@ -51,11 +51,7 @@
   position: absolute;
   transform: translate(50%, 50%);
   transition: all 0.2s;
-
   z-index: 1;
-
-  /* top: 15%;
-    left: 50%; */
 }
 .player-piece.highlight {
   cursor: pointer;
@@ -124,11 +120,9 @@
 
 
 .player-base.highlight {
-  /* animation: border-blink 0.7s infinite ease-in-out;
-   */
-   border-color: aliceblue;/* Set the border width */
+   border-color: aliceblue;
    border-width: 20px; 
-   animation: border-blink  1.5s infinite ease-in-out; /* Your existing animation */
+   animation: border-blink  1.5s infinite ease-in-out; 
 }
 
 @keyframes border-blink {
@@ -140,11 +134,8 @@
 }
 
 .btn {
-  /* padding: 25px 25px; */
   border: none;
-  /* cursor: pointer; */
   font-size: 16px;
-  /*font-color*/
   color: transparent;
 }
 
@@ -170,7 +161,6 @@
 
 .row {
   display: flex;
-  /* justify-content: space-between; */
   display: block;
   margin-left: auto;
   margin-right: auto;
