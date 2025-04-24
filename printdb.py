@@ -5,7 +5,7 @@ cur = conn.cursor()
 
 def get_posts():
     with conn:
-        cur.execute("SELECT * FROM auth_user")
+        cur.execute("SELECT * FROM nopassauth_userprofile")
         print(cur.fetchall())
 
 get_posts()

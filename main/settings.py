@@ -30,7 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_URL = '/login'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework', #added for REST api
     'rest_framework.authtoken',
-	'github', #added for github login
 	'ludo', #added for game
 	'nopassauth', #added for 42 login
 	'pong', #added for pong game
@@ -51,19 +50,12 @@ INSTALLED_APPS = [
 ]
 
 ASGI_APPLICATION = 'main.asgi.application'
+
 CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
-        },
-    },
+	'default': {
+		'BACKEND':'channels.layers.InMemoryChannelLayer'
+	}
 }
-# CHANNEL_LAYERS = {
-# 	'default': {
-# 		'BACKEND':'channels.layers.InMemoryChannelLayer'
-# 	}
-# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -101,11 +93,15 @@ WSGI_APPLICATION = 'main.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+    
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'admin',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'postgres',
+        'PORT': '5432',
     }
 }
 
@@ -144,26 +140,27 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = 'static/'
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "main/static",
-    "ludo/static/",
-    "pong/templates/static/",
+    "ludo/static/ludo",
+    "pong/static/pong",
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# GITHUB OAUTH
-GITHUB_OAUTH_CLIENT_ID = 'a8e03103754833456ade'
-GITHUB_OAUTH_SECRET = '06860f9b942c9a2f14a59ce188bce560a46db4bb'
-GITHUB_OAUTH_CALLBACK_URL = 'http://127.0.0.1:8000/git/callback'
-GITHUB_OAUTH_SCOPES = []
-
 # 42AUTH
 OAUTH42_CLIENT_ID = 'u-s4t2ud-c2123d6752521e96e8bbd0c748a04b0739c0885bb724efbc8ef78cfcb464d05e'
 OAUTH42_SECRET = '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'
 OAUTH42_CALLBACK_URL = 'http://127.0.0.1:8000/callback/'
 OAUTH42_SCOPES = []
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+LOGIN_URL = 'login/'
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://127.0.0.1']

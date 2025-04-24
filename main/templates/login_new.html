@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            margin: 0; /* Reset margin */
+            padding: 0; /* Reset padding */
+        }
+
+        /* Header */
+        .large-header {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: url("{% static 'www/imgs/space2.jpg' %}");  /* Set background color to black */
+            overflow: hidden;
+            z-index: 1;
+            background-size: cover; /* Ensure the background image covers the entire element */
+        }
+
+        .main-title {
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            color: #f9f1e9;
+            text-align: center;
+            top: 50%;
+            left: 50%;
+            font-weight: 500;
+            transform: translate3d(-50%,-50%,0);
+            font-family: 'Lato', sans-serif;
+            z-index: 2; /* Increased z-index to ensure it's above the button */
+        }
+
+        .custom-btn {
+            width: 114px;
+    height: 27px;
+    color: #fff; /* Text color */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+  /* color: #03e9f4; */
+  background-color: #03e9f4;
+  text-decoration: none;
+  overflow: hidden;
+
+    /* background: #03e9f4; Background color */
+    cursor: pointer;
+  transition: .5s;
+  display: inline-block;
+  font-size: 16px;
+  padding: 10px 20px;
+
+
+    /* transition: background 0.3s ease, color 0.3s ease; */
+    position: absolute;
+    left: 50%;
+     top: 55%; /*Adjusted top position */
+    transform: translateX(-50%);
+    z-index: 1; /* Decreased z-index to ensure it's below the title */
+    text-align: center;
+    /* margin-top: -157px; */
+
+    line-height: 20px;
+    
+    padding: 3px;
+        }
+
+        /* Button Styles */
+        
+
+        /* Login form style */
+        .login-box {
+    position: absolute;
+    top: 50%; /* Adjusted position */
+    left: 50%; /* Adjusted position */
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 40px;
+    background: rgba(0,0,0,.5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+    display: none; /* Initially hide the form */
+}
+
+.login-box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.login-box .user-box {
+  position: relative;
+}
+
+.login-box .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+
+}
+.login-box .user-box label {
+  position: absolute;
+  top:0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: .5s;
+  font-family: 'Lato', sans-serif;
+
+}
+
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+  
+}
+
+.login-box form a {
+    font-family: 'Lato', sans-serif;
+    margin-right: 25px;
+align-items:center ;
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #03e9f4;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  margin-top: 40px;
+  letter-spacing: 1px
+}
+
+.custom-btn:hover,
+.login-box a:hover {
+  background: #03e9f4;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #03e9f4,
+              0 0 25px #03e9f4,
+              0 0 50px #03e9f4,
+              0 0 100px #03e9f4;
+}
+
+.custom-btn span,
+.login-box a span {
+  position: absolute;
+  display: block;
+}
+
+.custom-btn a span:nth-child(1),
+.login-box a span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #03e9f4);
+  animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+  50%,100% {
+    left: 100%;
+  }
+}
+
+.custom-btn a span:nth-child(2),
+.login-box a span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #03e9f4);
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: .25s
+}
+
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
+  }
+  50%,100% {
+    top: 100%;
+  }
+}
+
+.custom-btn a span:nth-child(3),
+.login-box a span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #03e9f4);
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: .5s
+}
+
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
+  }
+  50%,100% {
+    right: 100%;
+  }
+}
+
+.custom-btn a span:nth-child(4),
+.login-box a span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #03e9f4);
+  animation: btn-anim4 1s linear infinite;
+  animation-delay: .75s
+}
+
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,100% {
+    bottom: 100%;
+  }
+}
+
+
+        
+    </style>
+</head>
+<body>
+    <div id="large-header" class="large-header">
+        <canvas id="demo-canvas"></canvas>
+        <h1 class="main-title">Welcome to pong!.</h1>
+        <a href="#" id="login-btn" class="custom-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>Start</a>
+        <div id="login-box" class="login-box">
+
+            <form id="loginForm" method="post" action="{% url 'nopassauth:login' %}">
+                {% csrf_token %}
+                <div class="form-group user-box">
+                    <input type="text" id="username" name="username" class="form-control" required>
+                    <label>Username</label>
+                </div>
+                <div class="form-group user-box">
+                    <input type="password" id="password" name="password" class="form-control" required>
+                    <label>Password</label>
+                </div>
+                <a href="#" id="submitForm">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Login
+                </a>
+                <a href="{% url 'nopassauth:42login' %}">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Register with 42
+                </a>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+          $('#submitForm').on('click', function(e) {
+            e.preventDefault(); // Prevent default link behavior
+            console.log("Form submission triggered!"); // Add this line
+            $('#loginForm').submit(); // Submit the form
+          });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var loginBtn = document.getElementById("login-btn");
+            var loginForm = document.getElementById("login-box");
+            var mainTitle = document.querySelector(".main-title");
+    
+            loginBtn.addEventListener("click", function(event) {
+                event.preventDefault();
+                loginForm.style.display = "block"; // Show the login form
+                loginBtn.style.display = "none"; // Hide the "Start" button
+                mainTitle.style.display = "none"; // Hide the main title
+                mainTitle.style.zIndex = "0"; // Decrease z-index of the main title
+            });
+        });
+    </script>
+    
+
+    <script>
+        (function() {
+            var width, height, largeHeader, canvas, ctx, points, target, animateHeader = true;
+
+// Main
+initHeader();
+initAnimation();
+addListeners();
+
+function initHeader() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    target = {x: width/2, y:
+height/2};
+
+    largeHeader = document.getElementById('large-header');
+    largeHeader.style.height = height+'px';
+
+    canvas = document.getElementById('demo-canvas');
+    canvas.width = width;
+    canvas.height = height;
+    ctx = canvas.getContext('2d');
+
+    // create points
+    points = [];
+    for(var x = 0; x < width; x = x + width/20) {
+        for(var y = 0; y < height; y = y + height/20) {
+            var px = x + Math.random()*width/20;
+            var py = y + Math.random()*height/20;
+            var p = {x: px, originX: px, y: py, originY: py };
+            points.push(p);
+        }
+    }
+
+    // for each point find the 5 closest points
+    for(var i = 0; i < points.length; i++) {
+        var closest = [];
+        var p1 = points[i];
+        for(var j = 0; j < points.length; j++) {
+            var p2 = points[j];
+            if(!(p1 == p2)) {
+                var placed = false;
+                for(var k = 0; k < 5; k++) {
+                    if(!placed) {
+                        if(closest[k] == undefined) {
+                            closest[k] = p2;
+                            placed = true;
+                        }
+                    }
+                }
+
+                for(var k = 0; k < 5; k++) {
+                    if(!placed) {
+                        if(getDistance(p1, p2) < getDistance(p1, closest[k])) {
+                            closest[k] = p2;
+                            placed = true;
+                        }
+                    }
+                }
+            }
+        }
+        p1.closest = closest;
+    }
+
+    // assign a circle to each point
+    for(var i in points) {
+        var c = new Circle(points[i], 2+Math.random()*2, 'rgba(255,255,255,0.3)');
+        points[i].circle = c;
+    }
+}
+
+// Event handling
+function addListeners() {
+    if(!('ontouchstart' in window)) {
+        window.addEventListener('mousemove', mouseMove);
+    }
+    window.addEventListener('scroll', scrollCheck);
+    window.addEventListener('resize', resize);
+}
+
+function mouseMove(e) {
+    var posx = posy = 0;
+    if (e.pageX || e.pageY) {
+        posx = e.pageX;
+        posy = e.pageY;
+    }
+    else if (e.clientX || e.clientY)    {
+        posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+        posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+    }
+    target.x = posx;
+    target.y = posy;
+}
+
+function scrollCheck() {
+    if(document.body.scrollTop > height) animateHeader = false;
+    else animateHeader = true;
+}
+
+function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    largeHeader.style.height = height+'px';
+    canvas.width = width;
+    canvas.height = height;
+}
+
+// animation
+function initAnimation() {
+    animate();
+    for(var i in points) {
+        shiftPoint(points[i]);
+    }
+}
+
+function animate() {
+    if(animateHeader) {
+        ctx.clearRect(0,0,width,height);
+        for(var i in points) {
+            // detect points in range
+            if(Math.abs(getDistance(target, points[i])) < 4000) {
+                points[i].active = 0.3;
+                points[i].circle.active = 0.6;
+            } else if(Math.abs(getDistance(target, points[i])) < 20000) {
+                points[i].active = 0.1;
+                points[i].circle.active = 0.3;
+            } else if(Math.abs(getDistance(target, points[i])) < 40000) {
+                points[i].active = 0.02;
+                points[i].circle.active = 0.1;
+            } else {
+                points[i].active = 0;
+                points[i].circle.active = 0;
+            }
+
+            drawLines(points[i]);
+            points[i].circle.draw();
+        }
+    }
+    requestAnimationFrame(animate);
+}
+
+function shiftPoint(p) {
+    gsap.to(p, 1+1*Math.random(), {x:p.originX-50+Math.random()*100,
+        y: p.originY-50+Math.random()*100, ease:Circ.easeInOut,
+        onComplete: function() {
+            shiftPoint(p);
+        }});
+}
+
+// Canvas manipulation
+function drawLines(p) {
+    if(!p.active) return;
+    for(var i in p.closest) {
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.closest[i].x, p.closest[i].y);
+        ctx.strokeStyle = 'rgba(156,217,249,'+ p.active+')';
+        ctx.stroke();
+    }
+}
+
+function Circle(pos,rad,color) {
+    var _this = this;
+
+    // constructor
+    (function() {
+        _this.pos = pos || null;
+        _this.radius = rad || null;
+        _this.color = color || null;
+    })();
+
+    this.draw = function() {
+        if(!_this.active) return;
+        ctx.beginPath();
+        ctx.arc(_this.pos.x, _this.pos.y, _this.radius, 0, 2 * Math.PI, false);
+        ctx.fillStyle = 'rgba(156,217,249,'+ _this.active+')';
+        ctx.fill();
+    };
+}
+
+// Util
+function getDistance(p1, p2) {
+    return Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2);
+}
+
+})();
+</script>
+</body>
+</html>

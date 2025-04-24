@@ -1,0 +1,8 @@
+/venv/
+/data/
+test.rest
+.env
+/pong/__pycache__/
+/pong/templates/pong/dist/
+/pong/templates/pong/node-modules/
+/static/

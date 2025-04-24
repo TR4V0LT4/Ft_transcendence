@@ -23,9 +23,12 @@ def signup(request):
 	serializer = UserSerializer(data=request.data)
 	if serializer.is_valid():
 		serializer.save()
+		# Create UserProfile instance and associate it with the newly created User
 		user = User.objects.get(username=request.data['username'])
+		# Set password for the associated User
 		user.set_password(request.data['password'])
 		user.save()
+		# Generate token for the user
 		token = Token.objects.create(user=user)
 		return Response({"token": token.key, "user": serializer.data})
 	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -12,25 +12,17 @@
   </head>
   <style>
     body {
-      background-image: url("{% static 'images/blue.jpg' %}");
-      background-repeat: no-repeat;
+      background-color: #000;
       display: flex;
       background-size: cover;
       backdrop-filter: blur(1px);
     }
   </style>
 
-
-<body>
-  <button id="leave-btn" class="leave-button">Leave</button>
-  <script>
-    document.getElementById("leave-btn").addEventListener("click", function() {
-      window.location.href = "/welcome/";
-    });
-  </script>
+  <body>
     <div id="game_board" room_code="{{room_code}}"></div>
     <div class="ludo-container">
-      <h1>Welocome to ludo :</h1>
+      <h1>Welcome to Ludo :  {{room_code}}</h1>
       <div class="ludo">
         <div class="player-pieces">
           <div class="player-piece" player-id="P1" piece="0"></div>

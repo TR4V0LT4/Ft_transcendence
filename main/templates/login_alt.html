@@ -10,11 +10,34 @@
 	<link rel="stylesheet" href="{% static 'www/css/login.css' %}"/>
 </head>
 <body>
-	<div class="container">
+    <div class="container">
+        <h1>Login</h1>
+        
+        <!-- Form for setting password -->
+        {% if set_password_form %}
+            <form method="post" action="{% url 'nopassauth:callback' %}">
+                {% csrf_token %}
+                {{ set_password_form.as_p }}
+                <button type="submit" class="btn btn-primary">Set Password</button>
+            </form>
+        {% else %}
+            <!-- Form for logging in -->
+            <form method="post" action="{% url 'nopassauth:login' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        {% endif %}
 		<h1>pong!.</h1>
-		<hr>
-		<a href="{% url 'nopassauth:login' %}" class="custom-btn btn-6"><span>Login with 42</span>
-	</div>
+		<a href="{% url 'nopassauth:42login' %}" class="custom-btn btn-6"><span>Login with 42</span>
+    </div>
 
 	<!-- Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

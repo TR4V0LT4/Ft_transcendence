@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Card</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* CSS styles */
+        @import url('https://fonts.googleapis.com/css?family=Krub:400,700');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background: #202020;
+            font-family: 'Krub', sans-serif;
+        }
+
+        .card {
+            position: absolute;
+            margin: auto;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 696px;
+            height: 537px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px 5px rgba(0, 0, 0, 0.2);
+            background: #151515;
+            overflow: hidden;
+            color: white;
+            animation: fadeIn 2s ease-in;
+        }
+
+        .ds-top {
+            position: absolute;
+            margin: auto;
+            top: 0;
+            right: 0;
+            left: 0;
+            width: 696px;
+            height: 80px;
+            background: #6420AA;
+            animation: dsTop 1.5s;
+        }
+
+        .avatar-holder {
+            position: absolute;
+            margin: auto;
+            top: 40px;
+            right: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            box-shadow: 0 0 0 5px #151515,
+                        inset 0 0 0 5px #000000,
+                        inset 0 0 0 5px #000000,
+                        inset 0 0 0 5px #000000,
+                        inset 0 0 0 5px #000000;
+            background: white;
+            overflow: hidden;
+            animation: mvTop 1.5s;
+        }
+
+        .avatar-holder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .name {
+            position: absolute;
+            margin: auto;
+            top: -156px;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: inherit;
+            height: 40px;
+            text-align: center;
+            animation: fadeIn 2s ease-in;
+        }
+
+        .name a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .name a:hover {
+            color: #aa20a3;
+        }
+
+        .name h6 {
+            position: absolute;
+            margin: auto;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            color: white;
+            width: 40px;
+        }
+
+        .edit-icon {
+            position:sticky;
+            top: 6px;
+            right: 10px;
+            cursor: pointer;
+            color: white;
+            font-size: 14px;
+        }
+
+        .edit-icon:hover {
+            color: #aa20a3;
+        }
+
+        .button {
+            position: absolute;
+            margin: auto;
+            padding: 8px;
+            top: 20px;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: inherit;
+            height: 40px;
+            text-align: center;
+            animation: fadeIn 2s ease-in;
+            outline: none;
+        }
+
+        .button a {
+            padding: 5px 20px;
+            border-radius: 10px;
+            color: white;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            font-size: 10px;
+            transition: all 1s;
+        }
+
+        .button a:hover {
+            color: white;
+            background: #aa20a3;
+        }
+
+        .ds-info {
+            position: absolute;
+            margin: auto;
+            top: -59px;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            width: inherit;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .ds-info .ds {
+            position: relative;
+            width: calc(250px / 3);
+            text-align: center;
+            color: white;
+            animation: fadeInMove 2s;
+            animation-fill-mode: forwards;
+        }
+
+        .ds-info h6 {
+            text-transform: uppercase;
+            color: #aa20a3;
+        }
+
+        .ds-info p {
+            font-size: 12px;
+        }
+
+        .ds-skill {
+            position: absolute;
+            margin: auto;
+            bottom: 131px;
+            right: 0;
+            left: 0;
+            width: 491px;
+            height: 100px;
+            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+
+.skill-column {
+    padding: 0 10px;
+}
+
+.skill {
+    margin-bottom: 20px;
+}
+        .ds-skill h5 {
+            margin-bottom: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #6420AA;
+        }
+
+        .ds-skill .skill h5 {
+            font-weight: 400;
+            font-size: 8px;
+            letter-spacing: 0.05em;
+            margin: 4px 0;
+            color: white;
+        }
+
+        .ds-skill .skill .fab {
+            color: #6420AA;
+            font-size: 14px;
+        }
+
+        .ds-skill .skill .bar {
+            height: 5px;
+            background: #6420AA;
+            text-align: right;
+        }
+
+        .ds-skill .skill .bar p {
+            color: white;
+            font-size: 8px;
+            padding-top: 5px;
+            animation: fadeIn 5s;
+        }
+
+        .ds-skill .skill .bar:hover {
+            background: white;
+        }
+
+        .ds-skill .skill .bar-pong-wins {
+            width: {{profile.stats.winrate}}%;
+            animation: htmlSkill 1s;
+            animation-delay: .4s;
+        }
+
+        .ds-skill .skill .bar-ludo        ogame {
+            width: 60%;
+            animation: cssSkill 2s;
+            animation-delay: .4s;
+        }
+
+        /* Keyframes */
+        @keyframes fadeInMove {
+            0% {
+                opacity: 0;
+                left: -300px;
+            }
+            100% {
+                opacity: 1;
+                left: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes htmlSkill {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 95%;
+            }
+        }
+
+        @keyframes cssSkill {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 90%;
+            }
+        }
+
+        @keyframes jsSkill {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 75%;
+            }
+        }
+
+        @keyframes mvBottom {
+            0% {
+                bottom: -150px;
+            }
+            100% {
+                bottom: 10px;
+            }
+        }
+
+        @keyframes mvTop {
+            0% {
+                top: -150px;
+            }
+            100% {
+                top: 40px;
+            }
+        }
+
+        @keyframes dsTop {
+            0% {
+                top: -150px;
+            }
+            100% {
+                top: 0;
+            }
+        }
+
+        /* Profile Picture CSS */
+        .profile-pic {
+            position: absolute;
+            margin: auto;
+            top: 40px; /* Adjust this value as needed */
+            right: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            z-index: 1; /* Ensure it's above other elements */
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-pic label {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .profile-pic label:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .profile-pic label i {
+            color: #fff;
+            font-size: 24px;
+            display: none; 
+        }
+
+        .profile-pic label:hover i {
+            display: block; 
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            /* font-size: 20px; */
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        
+        .close-button:hover {
+            background-color: rgba(255, 255, 255, 0.3); n
+            color: #202020;
+        }
+    </style>
+</head>
+<body>
+    <!-- HTML content -->
+    <div class="card">
+        <!-- X button -->
+
+        <div class="ds-top"></div>
+        <div class="close-button"><a href="{% url 'nopassauth:home' %}">X</a></div>
+        <!-- Profile Picture -->
+        <div class="profile-pic">
+            <input type="file" id="profile-pic-input" style="display: none;" />
+            <label for="profile-pic-input">
+                <i class="fas fa-camera"></i>
+            </label>
+            <img src="{{ profile.image.url }}" alt="Profile Picture">
+        </div>
+        <!-- End Profile Picture -->
+
+        <div class="name">
+            <a id="editableName">{{ profile.username }}</a>
+            <i class="edit-icon fas fa-pencil-alt" onclick="editName()"></i>
+        </div>
+
+        <div class="ds-info">
+            <div class="ds projects">
+                <h6 title="Score">Score <i class="fas fa-medal"></i></h6>
+                <p>{{ profile.stats.score }}</p>
+            </div>
+        </div>
+        
+        <!-- Update the HTML structure -->
+        <div class="ds-skill">
+            <div class="skill-column">
+                <h5>Space pong <i class="fas fa-gamepad"></i></h5>
+                <div class="skill html">
+                    <h5><i class="fas fa-dice"></i> Games played </h5><p>{{ profile.stats.games_played }}</p>
+                    <h5><i class="fas fa-trophy"></i> Wins </h5><p>{{ profile.stats.wins }}</p>
+                    <h5><i class="fas fa-crown"></i> Highest score </h5><p>{{ profile.stats.highest_score }}</p>
+                    <h5><i class="fas fa-chart-line"></i> Win rate </h5>
+                    <div class="bar bar-pong-wins">
+                        <p>{{ profile.stats.winrate }}%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript code for profile picture upload
+
+const profilePicInput = document.getElementById('profile-pic-input');
+const profilePicImg = document.querySelector('.profile-pic img');
+
+profilePicInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            profilePicImg.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+
+        // JavaScript function to edit the name
+        function editName() {
+            const newName = prompt("Enter new name:");
+            if (newName !== null && newName.trim() !== "") {
+                document.getElementById("editableName").innerText = newName;
+            }
+        }
+    </script>
+</body>
+</html>

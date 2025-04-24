@@ -20,13 +20,13 @@
   <body>
     <div class="profile-info">
       <img
-        src="{{ request.session.profile.image.link }}"
+        src="{{ profile.image.url }}"
         width="20%"
         alt="User Avatar"
       />
       <div>
-        <h2>{{ request.session.profile.login }}</h2>
-        <p>{{ request.session.profile.email }}</p>
+        <h2>{{ profile.username }}</h2>
+        <p>{{ profile.name }}</p>
         <!-- Add more user info as needed -->
       </div>
     </div>
@@ -36,7 +36,7 @@
       <table>
         <tr>
           <th>Games Played</th>
-          <td>100</td>
+          <td>{{ profile.pong_games_played }}</td>
         </tr>
         <tr>
           <th>Wins</th>
@@ -59,7 +59,7 @@
       <table>
         <tr>
           <th>Games Played</th>
-          <td>50</td>
+          <td>{{ profile.pong_games_played }}</td>
         </tr>
         <tr>
           <th>Wins</th>

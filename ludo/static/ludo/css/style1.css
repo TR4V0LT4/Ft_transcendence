@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    gap: 30px;
+}
+
+label[for="room"] {
+    color: #7f8fa6;
+}
+.input-bx{
+    position: relative;
+    width: 400px;
+}
+.input-bx input{
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #7f8fa6;
+    border-radius: 5px;
+    background: transparent;
+    outline: none;
+    font-size: 2rem;
+    transition: 0.6s;
+}
+
+.input-bx span{
+    position: absolute;
+    left: 0;
+    padding: 10px;
+    font-size: 1rem;
+    color: #7f8fa6;
+    text-transform: uppercase;
+    pointer-events: none;
+    transition: 0.6s;
+}
+.input-bx input:valid ~ span,
+.input-bx input:focus ~ span{
+    color: #3742fa;
+    transform: translateX(10px) translateY(-7px);
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0 10px;
+    background: #7f8fa6;
+    letter-spacing: 0.1rem;
+}
+
+.input-bx input:valid,
+.input-bx input:focus{
+    color: #3742fa;
+    border: 2px solid #3742fa;
+
+}
+
+.input-bx input {
+    width: calc(100% - 100px); /* Adjust the width of the input box as needed */
+}
+
+.input-bx button {
+    background-color:hsl(215, 18%, 57%);
+    border:2px solid #7f8fa6;
+   
+    position: absolute;
+    right: 0;
+    top: 5px;
+    width: 80px; /* Adjust the width of the button as needed */
+    height: 80%; /* Match the height of the input box */
+    border-radius: 5px; /* Remove button edges */
+}
+.button-container {
+    text-align: center;
+}
+.button {
+    background-color: #7f8fa6; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    margin-left:70px;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-left: 100px;
+}
+
+.button:hover {
+    background-color: #7f8fa6; /* Darker Green */
+}

@@ -1,0 +1,23 @@
+# Use an appropriate base image with Node.js installed
+FROM node:21.7.1
+
+# Set working directory
+WORKDIR /app
+
+COPY . /app
+# Copy package.json and package-lock.json
+COPY pong/package*.json ./pong
+# Install necessary dependencies
+WORKDIR /app/pong
+RUN npm install
+RUN npm ci
+
+# Copy the rest of your application code
+
+
+
+# Expose any necessary ports
+EXPOSE 1234
+
+ENTRYPOINT npm start
+# Command to run your application
